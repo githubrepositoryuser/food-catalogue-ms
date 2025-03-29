@@ -27,7 +27,7 @@ pipeline {
 
     stage('SonarQube Analysis') {
   steps {
-    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://172.23.202.112:9000/ -Dsonar.login=squ_5db8122c5aa51159e84979992c0dd72bbf8d18bf'
+    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://172.23.202.112:9000/ -Dsonar.login=squ_d617a5ddd9df0287798ffcf2c932a7a43b443706'
   }
 }
 
@@ -35,7 +35,7 @@ pipeline {
    stage('Check code coverage') {
             steps {
                 script {
-                    def token = "squ_5db8122c5aa51159e84979992c0dd72bbf8d18bf"
+                    def token = "squ_d617a5ddd9df0287798ffcf2c932a7a43b443706"
                     def sonarQubeUrl = "http://172.23.202.112:9000/api"
                     def componentKey = "com.codedecode:foodcatalogue"
                     def coverageThreshold = 80.0
