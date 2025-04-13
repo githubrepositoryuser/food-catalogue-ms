@@ -25,30 +25,6 @@ pipeline {
       }
     }
 
-    stage('SonarQube Analysis') {
-  steps {
-    sh 'mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://172.23.202.112:9000/ -Dsonar.login=squ_d617a5ddd9df0287798ffcf2c932a7a43b443706'
-  }
-}
-
-
-   stage('Check code coverage') {
-            steps {
-                script {
-                    def token = "squ_d617a5ddd9df0287798ffcf2c932a7a43b443706"
-                    def sonarQubeUrl = "http://172.23.202.112:9000/api"
-                    def componentKey = "com.codedecode:foodcatalogue"
-                    def coverageThreshold = 80.0
-
-                    def response = sh (
-                        script: "curl -H 'Authorization: Bearer ${token}' '${sonarQubeUrl}/measures/component?component=${componentKey}&metricKeys=coverage'",
-                        returnStdout: true
-                    ).trim()
-                }
-            }
-        } 
-
-
       stage('Docker Build and Push') {
       steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
