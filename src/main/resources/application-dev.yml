@@ -5,4 +5,22 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-0.eureka-service.default.svc.cluster.local:8761/eureka
-
+logging:
+    level:
+        root: DEBUG
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        hikari:
+            connectionTimeout: 20000
+            maximumPoolSize: 5
+            minimum-idle: 5
+    h2:
+        console:
+            enabled: true
+            path: /h2
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate:
+            ddl-auto: update
+        show-sql: true
